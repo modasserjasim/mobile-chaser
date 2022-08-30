@@ -116,4 +116,4 @@ const displayMobileDetails = mobile =>{
     `;
 }
 
-loadMobiles ('oppo');
+loadMobiles ('tab');
