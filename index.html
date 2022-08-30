@@ -10,7 +10,13 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-</head>
+    <style>
+        p {
+            margin-top: 0;
+            margin-bottom: 0.5rem !important;
+        }
+    </style>
+    </head>
 
 <body>
 
@@ -22,7 +28,8 @@
             <!-- Search box -->
             <h3 class="text-center pt-4">Find Phone by Brand or Phone Name</h3>
             <div class="input-group my-4 mx-auto" style="max-width: 840px;">
-                <input id="mobile-brand-field" type="text" class="form-control p-3 h5" placeholder="ex: iPhone 13 Pro Max">
+                <input id="mobile-brand-field" type="text" class="form-control p-3 h5"
+                    placeholder="ex: iPhone 13 Pro Max">
                 <div class="input-group-append">
                     <button id="search-btn" class="btn btn-secondary p-3" type="button">
                         <i class="fa fa-search"></i>
@@ -45,6 +52,29 @@
         <section id="spinner" class="text-center d-none position-absolute top-50 start-50 translate-middle">
             <div class="spinner-border text-success" role="status">
                 <span class="visually-hidden">Loading...</span>
+            </div>
+        </section>
+        <!-- Modal section start  -->
+        <section>
+            <!-- Modal -->
+            <div class="modal fade" id="mobileDetailsModal" tabindex="-1" aria-labelledby="mobileDetailsModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 id="phone-name" class="modal-title" id="mobileDetailsModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div id="modal-body" class="modal-body">
+                           <!-- modal body start  -->
+                           
+                           <!-- modal body end  -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>

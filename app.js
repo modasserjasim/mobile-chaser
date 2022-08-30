@@ -6,7 +6,7 @@ const loadMobiles = async(search, dataLimit) =>{
 }
 
 const displayMobiles = (mobiles, dataLimit) =>{
-    console.log(mobiles);
+    // console.log(mobiles);
     const mobileContainer = document.getElementById('mobiles-container');
     mobileContainer.innerHTML = '';
     //show all mobile 
@@ -30,6 +30,7 @@ const displayMobiles = (mobiles, dataLimit) =>{
                     <div class="card-body">
                     <h5 class="card-title">${mobile.phone_name}</h5>
                     <p class="card-text">Brand: ${mobile.brand}</p>
+                    <button onclick="loadMobileDetails('${mobile.slug}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mobileDetailsModal">View Details</button>
                     </div>
                 </div>
             `;
@@ -58,6 +59,16 @@ document.getElementById('search-btn').addEventListener('click', function(){
     processSearch(10);
 })
 
+// search by enter
+document.getElementById('mobile-brand-field').addEventListener('keypress', function(event){
+    console.log(event.key);
+    if(event.key === 'Enter'){
+        processSearch(10);
+    }
+})
+
+
+
 const toggleSpinner = isLoading =>{
     const spinnerSection = document.getElementById('spinner');
     if(isLoading){
@@ -71,4 +82,38 @@ document.getElementById('show-all-btn').addEventListener('click', function(){
     processSearch()
 })
 
-loadMobiles ();
+const loadMobileDetails = async id =>{
+    // console.log(id);
+    const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    displayMobileDetails(data.data);
+}
+
+const displayMobileDetails = mobile =>{
+    console.log(mobile);
+    document.getElementById('phone-name').innerText = `${mobile.name}`;
+    const modalBody = document.getElementById('modal-body');
+    modalBody.innerHTML = `
+        <div class="card">
+            <div class="row no-gutters">
+                <div class="col-sm-4">
+                    <img class="card-img" src="${mobile.image}" width="200px" alt="Mobile-Img">
+                </div>
+                <div class="col-sm-8">
+                    <div class="card-body ">
+                        <h6 class="card-title"><b>Brand:</b> ${mobile.brand}</h6>
+                        <p><b>Release Date: </b> ${mobile.releaseDate}</p>
+                        <p><b>Storage: </b> ${mobile.mainFeatures.storage}</p>
+                        <p><b>Storage: </b> ${mobile.mainFeatures.storage}</p>
+                        <p><b>Memory: </b> ${mobile.mainFeatures.memory}</p>
+                        <p><b>Chipset: </b> ${mobile.mainFeatures.chipSet}</p>
+                        <p><b>Display Size: </b> ${mobile.mainFeatures.displaySize}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+loadMobiles ('oppo');
